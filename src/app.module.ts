@@ -2,15 +2,18 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-
-const URL = process.env.MONGO_URL;
-
-if (!URL) {
-  throw new Error('URL is not found');
-}
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [ConfigModule.forRoot(), MongooseModule.forRoot(URL)],
+  imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'swagger-static'),
+      serveRoot: process.env.NODE_ENV === 'development' ? '/' : '/swagger',
+    }),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_URL || ''),
+  ],
   controllers: [AppController],
   providers: [],
 })
