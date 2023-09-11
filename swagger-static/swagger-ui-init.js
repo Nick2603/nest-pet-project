@@ -21,6 +21,67 @@ window.onload = function() {
             }
           }
         }
+      },
+      "/users": {
+        "get": {
+          "operationId": "UsersController_getUsers",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        },
+        "post": {
+          "operationId": "UsersController_createUser",
+          "parameters": [],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateUserDto"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "delete": {
+          "operationId": "UsersController_deleteUser",
+          "parameters": [
+            {
+              "name": "id",
+              "required": true,
+              "in": "path",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
+      },
+      "/testing/all-data": {
+        "delete": {
+          "operationId": "TestingController_deleteAllData",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }
+        }
       }
     },
     "info": {
@@ -37,7 +98,12 @@ window.onload = function() {
     ],
     "servers": [],
     "components": {
-      "schemas": {}
+      "schemas": {
+        "CreateUserDto": {
+          "type": "object",
+          "properties": {}
+        }
+      }
     }
   },
   "customOptions": {}

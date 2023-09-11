@@ -4,6 +4,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { UsersModule } from './users/users.module';
+import { TestingModule } from './testing/testing.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { join } from 'path';
     }),
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URL || ''),
+    UsersModule,
+    TestingModule,
   ],
   controllers: [AppController],
   providers: [],
