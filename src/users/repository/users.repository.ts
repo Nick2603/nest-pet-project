@@ -4,8 +4,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from '../schema/user.schema';
 import { IUserViewModel } from '../interface/user.interface';
-import { mapUserDBTypeToViewType } from 'src/mappers/mapUserDBTypeToViewType';
-import { HashService } from 'src/common/HashService';
+import { mapUserDBTypeToViewType } from '../../mappers/mapUserDBTypeToViewType';
+import { HashService } from '../../common/HashService';
 
 @Injectable()
 export class UsersRepository {
@@ -16,10 +16,6 @@ export class UsersRepository {
 
   async deleteAllUsers(): Promise<void> {
     await this.userModel.deleteMany({});
-  }
-
-  async getUsers(): Promise<User[]> {
-    return await this.userModel.find().exec();
   }
 
   async createUser(createUserDto: CreateUserDto): Promise<IUserViewModel> {

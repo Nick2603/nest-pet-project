@@ -1,4 +1,4 @@
-import { User } from 'src/users/schema/user.schema';
+import { User } from '../users/schema/user.schema';
 import { IUserViewModel } from '../users/interface/user.interface';
 
 export const mapUserDBTypeToViewType = (user: User): IUserViewModel => {

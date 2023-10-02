@@ -1,13 +1,21 @@
 import { Controller, Delete } from '@nestjs/common';
-import { UsersRepository } from 'src/users/repository/users.repository';
+import { BlogsRepository } from './../blogs/repository/blog.repository';
+import { UsersRepository } from '../users/repository/users.repository';
+import { CommentsRepository } from '../comments/repository/comment.repository';
 
 @Controller('testing')
 export class TestingController {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(
+    private usersRepository: UsersRepository,
+    private blogsRepository: BlogsRepository,
+    private commentsRepository: CommentsRepository,
+  ) {}
 
   @Delete('all-data')
-  deleteAllData() {
-    this.usersRepository.deleteAllUsers();
+  async deleteAllData() {
+    await this.usersRepository.deleteAllUsers();
+    await this.blogsRepository.deleteAllBlogs();
+    await this.commentsRepository.deleteAllComments();
     return;
   }
 }
